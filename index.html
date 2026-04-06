@@ -49,6 +49,7 @@
         touch-action: pan-x pan-y;
         background: black;
         overflow: hidden;
+        margin: 0;
       }
 
       td {
@@ -88,48 +89,152 @@
         position: relative;
         top: 4px;
       }
+
+      .topbar {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        z-index: 2;
+        color: white;
+        font-size: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+        flex-wrap: wrap;
+        text-align: right;
+      }
+
+      .topbar-meta {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .topbar-separator {
+        opacity: 0.7;
+      }
+
+      #keyboard_hint {
+        font-size: 24px;
+        opacity: 0.8;
+      }
+
+      #btn_kanye,
+      #btn_stop_sequence {
+        font-size: 22px;
+        cursor: pointer;
+        border: 0;
+        padding: 4px 10px;
+        font-family: 'VT323', monospace;
+        white-space: nowrap;
+      }
+
+      #btn_kanye {
+        background: white;
+        color: black;
+      }
+
+      #btn_stop_sequence {
+        background: #ff4d4d;
+        color: white;
+      }
+
+      .credit-link {
+        color: white;
+        font-size: 30px;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+
+      .soundboard {
+        border-top: 55px black solid;
+        border-right: 5px black solid;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      @media (max-width: 900px) {
+        .topbar {
+          left: 8px;
+          right: 8px;
+          top: 8px;
+          gap: 6px;
+          font-size: 22px;
+        }
+
+        #keyboard_hint {
+          font-size: 18px;
+        }
+
+        #btn_kanye,
+        #btn_stop_sequence,
+        .credit-link {
+          font-size: 18px;
+        }
+
+        .soundboard {
+          border-top: 88px black solid;
+        }
+
+        td {
+          font-size: 2.3em;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .topbar {
+          justify-content: center;
+          text-align: center;
+        }
+
+        .topbar-meta {
+          justify-content: center;
+        }
+
+        #keyboard_hint {
+          font-size: 15px;
+        }
+
+        #btn_kanye,
+        #btn_stop_sequence,
+        .credit-link {
+          font-size: 16px;
+        }
+
+        .soundboard {
+          border-top: 120px black solid;
+        }
+
+        td {
+          font-size: 1.7em;
+          border-width: 6px;
+        }
+
+        td[data-key]::after {
+          top: 6px;
+          right: 8px;
+          font-size: 0.42em;
+        }
+      }
     </style>
 
-    <div style="position: fixed; right: 10px; top: 10px; z-index: 2; color: white; font-size: 30px">
-      ·
-      <span id="keyboard_hint" style="font-size: 24px; opacity: 0.8">1 2 3 4 · Q W E R · A S D F · Z X C V</span> ·
-      <button
-        id="btn_kanye"
-        style="
-          font-size: 22px;
-          cursor: pointer;
-          background: white;
-          color: black;
-          border: 0;
-          padding: 4px 10px;
-          margin: 0 8px;
-          font-family: 'VT323', monospace;
-        "
-      >
-        STRONGER HOOK
-      </button>
-      <button
-        id="btn_stop_sequence"
-        style="
-          font-size: 22px;
-          cursor: pointer;
-          background: #ff4d4d;
-          color: white;
-          border: 0;
-          padding: 4px 10px;
-          margin: 0 8px 0 0;
-          font-family: 'VT323', monospace;
-        "
-      >
-        STOP
-      </button>
-      ·
-      <!--<span onclick="share()" style="cursor:pointer">ENVIAR</span> · --><a
-        href="https://twitter.com/vivirenremoto"
-        target="_blank"
-        style="color: white; font-size: 30px; text-decoration: none"
-        >by @vivirenremoto</a
-      >
+    <div class="topbar">
+      <span id="keyboard_hint">1 2 3 4 · Q W E R · A S D F · Z X C V</span>
+      <button id="btn_kanye">STRONGER HOOK</button>
+      <button id="btn_stop_sequence">STOP</button>
+      <div class="topbar-meta">
+        <span class="topbar-separator">·</span>
+        <!--<span onclick="share()" style="cursor:pointer">ENVIAR</span> · -->
+        <a href="https://twitter.com/vivirenremoto" target="_blank" class="credit-link">by @vivirenremoto</a>
+      </div>
     </div>
 
     <div
@@ -151,20 +256,7 @@
       <span id="timeline" style="color: white; display: none; z-index: 2"></span>
     </div>
 
-    <table
-      border="0"
-      cellspacing="0"
-      style="
-        border-top: 55px black solid;
-        border-right: 5px black solid;
-        position: fixed;
-        left: 0;
-        right: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-      "
-    >
+    <table border="0" cellspacing="0" class="soundboard">
       <tr>
         <td data-slug="Work it" data-key="1" style="background: #ff0000" onclick="play(this)">Work it</td>
         <td data-slug="Make it" data-key="2" style="background: #ff0000" onclick="play(this)">Make it</td>
